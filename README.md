@@ -41,8 +41,8 @@ Make [MagnifyingGlass] widget as the parent of the widget you wish to be used (u
 **glassPosition**|enum|*[GlassPosition]* enum to set the touch behavior or sticky position|
 **glassParams**|GlassParams|*[GlassParams]* class to set lens parameters|
 
-
 <br>
+
 **GlassPosition class**
 
 |Name|Description|
@@ -53,8 +53,8 @@ Make [MagnifyingGlass] widget as the parent of the widget you wish to be used (u
 **bottomLeft**|sticky position to bottom left corner of the screen|
 **bottomRight**|sticky position to bottom right corner of the screen|
 
-
 <br>
+
 **GlassParams class**
 
 |Name|Description|
