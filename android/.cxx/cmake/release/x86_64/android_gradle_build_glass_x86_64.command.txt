@@ -1,0 +1,7 @@
+Executable : /home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+arguments : 
+-C
+/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/release/x86_64
+glass
+jvmArgs : 
+

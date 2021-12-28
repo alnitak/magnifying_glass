@@ -1,0 +1,97 @@
+group 'com.bavagnoli.magnifying_glass'
+version '1.0'
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.3'
+    }
+}
+
+rootProject.allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 31
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        minSdkVersion 16
+
+        externalNativeBuild {
+            cmake {
+                // using clang
+                arguments '-DBUILD_TESTING=OFF', '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=c++_static', '-DCMAKE_VERBOSE_MAKEFILE=ON'
+                cppFlags "-std=c++11 -fexceptions -frtti" //-stdlib=libstdc++"
+                version "3.10.2"
+            }
+        }
+
+        packagingOptions{
+            doNotStrip "**/*.so"
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+            version "3.10.2"
+        }
+    }
+
+    buildTypes {
+        release {
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type.
+            minifyEnabled false
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            shrinkResources false
+
+            useProguard true
+
+            // Includes the default ProGuard rules files that are packaged with
+            // the Android Gradle plugin. To learn more, go to the section about
+            // R8 configuration files.
+            proguardFiles getDefaultProguardFile(
+                    'proguard-android-optimize.txt'),
+                    'proguard-rules.pro'
+        }
+
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+            jniDebuggable true
+            renderscriptDebuggable true
+        }
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+}
+
+dependencies {
+    implementation 'androidx.documentfile:documentfile:1.0.1'
+    implementation 'androidx.annotation:annotation:1.3.0'
+//    testImplementation 'junit:junit:4.13.1'
+//    androidTestImplementation 'androidx.test:runner:1.4.1'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+}

@@ -1,0 +1,2 @@
+ninja: Entering directory `/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/armeabi-v7a'
+ninja: no work to do.

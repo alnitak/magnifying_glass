@@ -1,0 +1,5 @@
+# ninja log v5
+0	67	1640529775	CMakeFiles/glass.dir/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/ios/Classes/glass.cpp.o	215ecd1ddaa1a74f
+67	77	1640529775	/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cmake/release/obj/arm64-v8a/libglass.so	f4633010499a3fff
+0	67	1640700028	CMakeFiles/glass.dir/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/ios/Classes/glass.cpp.o	215ecd1ddaa1a74f
+67	80	1640700028	/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cmake/release/obj/arm64-v8a/libglass.so	f4633010499a3fff

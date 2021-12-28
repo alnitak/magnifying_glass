@@ -1,0 +1,43 @@
+{
+  "stringTable": {
+    "0": "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86",
+    "1": "--target=i686-none-linux-android16 --gcc-toolchain=/home/deimos/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/deimos/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dglass_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -mstackrealign -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -std=c++11 -fexceptions -frtti -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/CMakeLists.txt",
+    "/home/deimos/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/home/deimos/Android/Sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+  ],
+  "cleanCommands": [
+    "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86\" clean"
+  ],
+  "buildTargetsCommand": "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "glass-Debug-x86": {
+      "buildCommand": "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86\" glass",
+      "buildType": "debug",
+      "toolchain": "543931094",
+      "abi": "x86",
+      "artifactName": "glass",
+      "files": [
+        {
+          "src": "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/ios/Classes/glass.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cmake/debug/obj/x86/libglass.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "543931094": {
+      "cppCompilerExecutable": "/home/deimos/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}
