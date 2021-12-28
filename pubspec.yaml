@@ -32,6 +32,6 @@ flutter:
         pluginClass: MagnifyingGlassPlugin
       linux:
         pluginClass: MagnifyingGlassPlugin
-      web:
-        pluginClass: MagnifyingGlassWeb
-        fileName: magnifying_glass_web.dart
+#      web:
+#        pluginClass: MagnifyingGlassWeb
+#        fileName: magnifying_glass_web.dart
