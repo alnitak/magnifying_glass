@@ -1,4 +1,4 @@
-# Yoda Flutter plugin
+# MagnifyingGlass Flutter plugin
 
 Flutter real-time magnifying glass lens widget with Barrel/Pincushion distortion.
 
