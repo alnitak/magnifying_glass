@@ -35,7 +35,7 @@ Make [MagnifyingGlass] widget as the parent of the widget you wish to be used (u
 
 ## MagnifyingGlass properties
 
-|Name|Type|Description|https://github.com/alnitak/magnifying_glass/blob/master/img/
+|Name|Type|Description|
 |:-------|:----------|:-----------|
 **controller**|MagnifyingGlassController|Let you control the glass state and parameters: <br>**openGlass()**<br>**closeGlass()**<br>**setDistortion(** *double distortion, double magnification* **)**<br>**setDiameter(** *int diameter* **)**|
 **glassPosition**|enum|*[GlassPosition]* enum to set the touch behavior or sticky position|
