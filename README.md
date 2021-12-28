@@ -43,7 +43,7 @@ Make [MagnifyingGlass] widget as the parent of the widget you wish to be used (u
 
 
 <br>
-***GlassPosition class***
+**GlassPosition class**
 
 |Name|Description|
 |:-------|:-----------|
@@ -55,7 +55,7 @@ Make [MagnifyingGlass] widget as the parent of the widget you wish to be used (u
 
 
 <br>
-***GlassParams class***
+**GlassParams class**
 
 |Name|Description|
 |:-------|:-----------|
