@@ -1,3 +1,3 @@
-ninja: Entering directory `/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/armeabi-v7a'
-[1/2] Building CXX object CMakeFiles/magnifying_glass_plugin.dir/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/ios/Classes/glass.cpp.o
-[2/2] Linking CXX shared library /home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cmake/debug/obj/armeabi-v7a/libmagnifying_glass_plugin.so
+ninja: Entering directory `C:\workspace\magnifying_glass\android\.cxx\cmake\debug\armeabi-v7a'
+[1/2] Building CXX object CMakeFiles/magnifying_glass_plugin.dir/C_/workspace/magnifying_glass/ios/Classes/glass.cpp.o
+[2/2] Linking CXX shared library C:\workspace\magnifying_glass\example\build\magnifying_glass\intermediates\cmake\debug\obj\armeabi-v7a\libmagnifying_glass_plugin.so

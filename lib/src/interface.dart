@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
 
+/// Bind C functions to Dart
 class Interface {
   static Interface? _instance;
   var _setParameter;

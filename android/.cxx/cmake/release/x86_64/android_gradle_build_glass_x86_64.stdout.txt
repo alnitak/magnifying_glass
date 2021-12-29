@@ -1,3 +1,0 @@
-ninja: Entering directory `/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/release/x86_64'
-[1/2] Building CXX object CMakeFiles/glass.dir/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/ios/Classes/glass.cpp.o
-[2/2] Linking CXX shared library /home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cmake/release/obj/x86_64/libglass.so

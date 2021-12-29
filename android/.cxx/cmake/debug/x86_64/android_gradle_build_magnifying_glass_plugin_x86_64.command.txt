@@ -1,7 +1,7 @@
-Executable : /home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+Executable : C:\Users\deimos\AppData\Local\Android\sdk\cmake\3.10.2.4988404\bin\ninja.exe
 arguments : 
 -C
-/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86_64
+C:\workspace\magnifying_glass\android\.cxx\cmake\debug\x86_64
 magnifying_glass_plugin
 jvmArgs : 
 
