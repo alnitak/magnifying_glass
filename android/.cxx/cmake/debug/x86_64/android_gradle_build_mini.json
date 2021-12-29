@@ -1,19 +1,19 @@
 {
   "buildFiles": [
-    "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/CMakeLists.txt",
-    "/home/deimos/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
-    "/home/deimos/Android/Sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
+    "C:\\workspace\\magnifying_glass\\android\\CMakeLists.txt",
+    "C:\\Users\\deimos\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\android.toolchain.cmake",
+    "C:\\Users\\deimos\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\platforms.cmake"
   ],
   "cleanCommands": [
-    "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86_64\" clean"
+    "C:\\Users\\deimos\\AppData\\Local\\Android\\sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\workspace\\magnifying_glass\\android\\.cxx\\cmake\\debug\\x86_64\" clean"
   ],
-  "buildTargetsCommand": "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "buildTargetsCommand": "C:\\Users\\deimos\\AppData\\Local\\Android\\sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"C:\\workspace\\magnifying_glass\\android\\.cxx\\cmake\\debug\\x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
   "libraries": {
-    "glass-Debug-x86_64": {
-      "artifactName": "glass",
-      "buildCommand": "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86_64\" glass",
+    "magnifying_glass_plugin-Debug-x86_64": {
+      "artifactName": "magnifying_glass_plugin",
+      "buildCommand": "C:\\Users\\deimos\\AppData\\Local\\Android\\sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\workspace\\magnifying_glass\\android\\.cxx\\cmake\\debug\\x86_64\" magnifying_glass_plugin",
       "abi": "x86_64",
-      "output": "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cmake/debug/obj/x86_64/libglass.so",
+      "output": "C:\\workspace\\magnifying_glass\\example\\build\\magnifying_glass\\intermediates\\cmake\\debug\\obj\\x86_64\\libmagnifying_glass_plugin.so",
       "runtimeFiles": []
     }
   }

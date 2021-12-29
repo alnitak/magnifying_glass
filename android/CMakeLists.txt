@@ -2,16 +2,17 @@ cmake_minimum_required(VERSION 3.4.1)
 
 message(${ANDROID_ABI})
 
+set(PLUGIN_NAME "magnifying_glass_plugin")
+
 add_library( 
 		# Sets the name of the library.
-        glass
+        ${PLUGIN_NAME}
 
         # Sets the library as a shared library.
         SHARED
 
         # Provides a relative path to your source file(s).
         ../ios/Classes/glass.cpp
-#        cpp/glass.cpp
 )
 
 
@@ -36,7 +37,7 @@ find_library(
 
 target_link_libraries(
         # Specifies the target library.
-        glass
+        ${PLUGIN_NAME}
 
        # Links the target library to the log library
        # included in the NDK.

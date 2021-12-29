@@ -14,75 +14,55 @@ class Interface {
   var _freeImg;
 
   DynamicLibrary nativeLib = Platform.isAndroid
-      ? DynamicLibrary.open("libglass.so")
-      : DynamicLibrary.process();
+      ? DynamicLibrary.open("libmagnifying_glass_plugin.so")
+      : (Platform.isWindows
+          ? DynamicLibrary.open("magnifying_glass_plugin.dll")
+          : DynamicLibrary.process());
 
   Interface._internal() {
     _setBmpHeaderSize = nativeLib
         .lookup<
-        NativeFunction<
-            Pointer<Void> Function(
-                Int32 width,
-                Int32 height)>>('setBmpHeaderSize')
-        .asFunction<
-        Pointer<Void> Function(
-            int width,
-            int height)>();
+            NativeFunction<
+                Pointer<Void> Function(
+                    Int32 width, Int32 height)>>('setBmpHeaderSize')
+        .asFunction<Pointer<Void> Function(int width, int height)>();
 
     _setParameter = nativeLib
         .lookup<
-        NativeFunction<
-            Pointer<Void> Function(
-                Double distortion,
-                Double magnification)>>('setParameters')
+            NativeFunction<
+                Pointer<Void> Function(
+                    Double distortion, Double magnification)>>('setParameters')
         .asFunction<
-        Pointer<Void> Function(
-            double distortion,
-            double magnification)>();
+            Pointer<Void> Function(double distortion, double magnification)>();
 
     _setDistortion = nativeLib
         .lookup<
-        NativeFunction<
-            Pointer<Void> Function(
-                Double distortion,
-                Double magnification)>>('setShiftMat')
+            NativeFunction<
+                Pointer<Void> Function(
+                    Double distortion, Double magnification)>>('setShiftMat')
         .asFunction<
-        Pointer<Void> Function(
-            double distortion,
-            double magnification)>();
+            Pointer<Void> Function(double distortion, double magnification)>();
 
     _storeImg = nativeLib
         .lookup<
-        NativeFunction<
-            Pointer<Void> Function(
-                Int32 width,
-                Int32 height,
-                Pointer<Uint8> imgBuffer)>>('storeImg')
+            NativeFunction<
+                Pointer<Void> Function(Int32 width, Int32 height,
+                    Pointer<Uint8> imgBuffer)>>('storeImg')
         .asFunction<
-        Pointer<Void> Function(
-            int width,
-            int height,
-            Pointer<Uint8> imgBuffer)>();
+            Pointer<Void> Function(
+                int width, int height, Pointer<Uint8> imgBuffer)>();
 
     _getSubImage = nativeLib
         .lookup<
-        NativeFunction<
-            Pointer<Uint8> Function(
-                Int32 topLeftX,
-                Int32 topLeftY,
-                Int32 width)>>('getSubImage')
+            NativeFunction<
+                Pointer<Uint8> Function(Int32 topLeftX, Int32 topLeftY,
+                    Int32 width)>>('getSubImage')
         .asFunction<
-        Pointer<Uint8> Function(
-            int topLeftX,
-            int topLeftY,
-            int width)>();
+            Pointer<Uint8> Function(int topLeftX, int topLeftY, int width)>();
 
     _freeImg = nativeLib
-        .lookup<
-        NativeFunction<
-            Pointer<Void> Function()>>('freeImg')
-        .asFunction<
-        Pointer<Void> Function()>();
+        .lookup<NativeFunction<Pointer<Void> Function()>>('freeImg')
+        .asFunction<Pointer<Void> Function()>();
   }
 
   factory Interface() {
@@ -118,8 +98,7 @@ class Interface {
 
   /// get glass image to display with current parameters
   Uint8List getSubImage(int topLeftX, int topLeftY, int width) {
-    late Pointer<Uint8> buffer =
-      _getSubImage(topLeftX, topLeftY, width);
+    late Pointer<Uint8> buffer = _getSubImage(topLeftX, topLeftY, width);
     return buffer.asTypedList(width * width * 4 + 122);
   }
 
@@ -127,6 +106,4 @@ class Interface {
   freeImg() {
     _freeImg();
   }
-
-
 }

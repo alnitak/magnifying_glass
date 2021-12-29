@@ -56,13 +56,12 @@ class GlassHandleState extends State<GlassHandle> {
     startPos = Offset.zero;
 
     Interface().storeImg(
-      widget.capturedWidget.size!.width.toInt(),
-      widget.capturedWidget.size!.height.toInt(),
+        widget.capturedWidget.size!.width.toInt(),
+        widget.capturedWidget.size!.height.toInt(),
         widget.capturedWidget.byteData!.buffer.asUint8List());
 
-    Interface().setBmpHeaderSize(
-        widget.params.diameter,
-        widget.params.diameter);
+    Interface()
+        .setBmpHeaderSize(widget.params.diameter, widget.params.diameter);
   }
 
   @override
@@ -75,18 +74,22 @@ class GlassHandleState extends State<GlassHandle> {
   refreshImage() {
     img!.value = Image.memory(
       Interface().getSubImage(
-          (widget.params.startingPosition!.dx.toInt() - (widget.params.diameter/2)).toInt(),
-          (widget.params.startingPosition!.dy.toInt() - (widget.params.diameter/2)).toInt(),
+          (widget.params.startingPosition!.dx.toInt() -
+                  (widget.params.diameter / 2))
+              .toInt(),
+          (widget.params.startingPosition!.dy.toInt() -
+                  (widget.params.diameter / 2))
+              .toInt(),
           widget.params.diameter),
       fit: BoxFit.fill,
-      gaplessPlayback: true,);
+      gaplessPlayback: true,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-
     // test frame compute time.
-    // No more tests. It is fast enough (usually <20 ms)
+    // No more tests nedded? It is fast enough (usually <20 ms)
     // WidgetsBinding.instance?.addPersistentFrameCallback((timeStamp) {
     //   stopwatch.stop();
     //   print('************** ${stopwatch.elapsedMilliseconds}');
@@ -98,14 +101,13 @@ class GlassHandleState extends State<GlassHandle> {
         Offset(screenSize.width / 2.0, screenSize.height / 2.0);
     if (img == null) {
       subImg = Interface().getSubImage(
-          (widget.params.startingPosition!.dx - (widget.params.diameter/2)).toInt(),
-          (widget.params.startingPosition!.dy - (widget.params.diameter/2)).toInt(),
+          (widget.params.startingPosition!.dx - (widget.params.diameter / 2))
+              .toInt(),
+          (widget.params.startingPosition!.dy - (widget.params.diameter / 2))
+              .toInt(),
           widget.params.diameter);
-      img = ValueNotifier<Image>(Image.memory(
-          subImg,
-          fit: BoxFit.fill));
+      img = ValueNotifier<Image>(Image.memory(subImg, fit: BoxFit.fill));
     }
-
 
     switch (widget.glassPosition) {
       case GlassPosition.touchPosition:
@@ -118,75 +120,79 @@ class GlassHandleState extends State<GlassHandle> {
         break;
       case GlassPosition.topRight:
         stickyPos = Offset(
-            screenSize.width - widget.params.diameter - widget.params.padding.right*2,
+            screenSize.width -
+                widget.params.diameter -
+                widget.params.padding.right * 2,
             0);
         break;
       case GlassPosition.bottomLeft:
         stickyPos = Offset(
             0,
-            screenSize.height - widget.params.diameter - widget.params.padding.bottom*2);
+            screenSize.height -
+                widget.params.diameter -
+                widget.params.padding.bottom * 2);
         break;
       case GlassPosition.bottomRight:
         stickyPos = Offset(
-            screenSize.width - widget.params.diameter - widget.params.padding.right*2,
-            screenSize.height - widget.params.diameter - widget.params.padding.bottom*2);
+            screenSize.width -
+                widget.params.diameter -
+                widget.params.padding.right * 2,
+            screenSize.height -
+                widget.params.diameter -
+                widget.params.padding.bottom * 2);
         break;
     }
 
     return ValueListenableBuilder<Image>(
         valueListenable: img!,
         builder: (_, _img, __) {
-
           return Transform.translate(
-            transformHitTests: true,
-            offset: widget.glassPosition == GlassPosition.touchPosition
-              ? startPos
-              : stickyPos,
-            child: Listener(
-              onPointerDown: (PointerDownEvent e) {
-                if (widget.glassPosition != GlassPosition.touchPosition) {
-                  startPos = Offset(
-                    e.position.dx - (widget.params.diameter / 2),
-                    e.position.dy - (widget.params.diameter / 2));
-                }
-              },
-              onPointerMove: (PointerMoveEvent e) async {
-                widget.params.startingPosition = e.position;
-                startPos = startPos + e.localDelta;
-                if (!mounted) return;
-                // stopwatch.start();
-                img!.value = Image.memory(
-                    Interface().getSubImage(
-                        startPos.dx.toInt(),
-                        startPos.dy.toInt(),
-                        widget.params.diameter),
+              transformHitTests: true,
+              offset: widget.glassPosition == GlassPosition.touchPosition
+                  ? startPos
+                  : stickyPos,
+              child: Listener(
+                onPointerDown: (PointerDownEvent e) {
+                  if (widget.glassPosition != GlassPosition.touchPosition) {
+                    startPos = Offset(
+                        e.position.dx - (widget.params.diameter / 2),
+                        e.position.dy - (widget.params.diameter / 2));
+                  }
+                },
+                onPointerMove: (PointerMoveEvent e) async {
+                  widget.params.startingPosition = e.position;
+                  startPos = startPos + e.localDelta;
+                  if (!mounted) return;
+                  // stopwatch.start();
+                  img!.value = Image.memory(
+                    Interface().getSubImage(startPos.dx.toInt(),
+                        startPos.dy.toInt(), widget.params.diameter),
                     fit: BoxFit.fill,
-                    gaplessPlayback: true,);
-              },
-              child: Padding(
-                padding: widget.params.padding,
-                child: CustomPaint(
-                  painter: GlassShadow(),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(widget.params.diameter.toDouble()),
-                    child: _img
+                    gaplessPlayback: true,
+                  );
+                },
+                child: Padding(
+                  padding: widget.params.padding,
+                  child: CustomPaint(
+                    painter: GlassShadow(),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                            widget.params.diameter.toDouble()),
+                        child: _img),
                   ),
                 ),
-              ),
-          ));
-      }
-    );
+              ));
+        });
   }
-
 }
-
 
 /// Painter class to drop shadow under the glass
 class GlassShadow extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     var path = Path();
-    path.addOval(ui.Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
+    path.addOval(
+        ui.Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
     canvas.drawShadow(path, const Color(0xFF000000), 8, false);
   }
 
@@ -194,5 +200,4 @@ class GlassShadow extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
   }
-
 }

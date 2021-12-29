@@ -18,11 +18,11 @@ class MagnifyingGlassController {
   Function(int diameter)? _setDiameter;
 
   _setController(
-      VoidCallback openGlass,
-      VoidCallback closeGlass,
-      Function(double distortion, double magnification) setDistortion,
-      Function(int diameter) setDiameter,
-    ) {
+    VoidCallback openGlass,
+    VoidCallback closeGlass,
+    Function(double distortion, double magnification) setDistortion,
+    Function(int diameter) setDiameter,
+  ) {
     _openGlass = openGlass;
     _closeGlass = closeGlass;
     _setDistortion = setDistortion;
@@ -87,25 +87,25 @@ class GlassParams {
   // Padding surrounding the glass to enlarge touching area
   final EdgeInsets padding;
 
-  GlassParams({
-    this.startingPosition,
-    required this.diameter,
-    this.magnification = 1.0,
-    this.distortion = 1.0,
-    this.padding = EdgeInsets.zero
-  }) : assert(diameter >= 10, 'Glass diameter should be almost 10');
+  GlassParams(
+      {this.startingPosition,
+      required this.diameter,
+      this.magnification = 1.0,
+      this.distortion = 1.0,
+      this.padding = EdgeInsets.zero})
+      : assert(diameter >= 10, 'Glass diameter should be almost 10');
 }
 
 class MagnifyingGlass extends StatefulWidget {
   // child that will be used by the glass
   final Widget child;
-  
+
   // glass parameters
   final GlassParams glassParams;
-  
+
   // glass controller
   final MagnifyingGlassController controller;
-  
+
   // glass position
   final GlassPosition? glassPosition;
 
@@ -115,7 +115,7 @@ class MagnifyingGlass extends StatefulWidget {
     required this.glassParams,
     required this.child,
     this.glassPosition = GlassPosition.touchPosition,
-  })  : super(key: key);
+  }) : super(key: key);
 
   @override
   State<MagnifyingGlass> createState() => _MagnifyingGlassState();
@@ -124,16 +124,17 @@ class MagnifyingGlass extends StatefulWidget {
 class _MagnifyingGlassState extends State<MagnifyingGlass> {
   // key used to grab the image
   late GlobalKey _childKey;
+
   // key used to refresh GlassHandle
   late GlobalKey<GlassHandleState> _glassHandle;
 
   // used to capture widget image
   final Completer<bool> completer = Completer<bool>();
-  
+
   // where the widget image is stored
   late CapturedWidget _captured;
-  
-  // capture image retry counter 
+
+  // capture image retry counter
   int _captureRetry = 0;
 
   // state of the glass
@@ -141,22 +142,21 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
 
   @override
   Widget build(BuildContext context) {
-    widget.controller._setController(
-        _openGlass, _closeGlass, _setDistortion, _setDiameter);
-    Interface().setParameter(widget.glassParams.distortion, widget.glassParams.magnification);
+    widget.controller
+        ._setController(_openGlass, _closeGlass, _setDistortion, _setDiameter);
+    Interface().setParameter(
+        widget.glassParams.distortion, widget.glassParams.magnification);
     Widget child;
     if (_isGlassVisible) {
-      child = Stack(
-        children: [
-          widget.child,
-          GlassHandle(
-            key: _glassHandle,
-            capturedWidget: _captured,
-            params: widget.glassParams,
-            glassPosition: widget.glassPosition!,
-          ),
-        ]
-      );
+      child = Stack(children: [
+        widget.child,
+        GlassHandle(
+          key: _glassHandle,
+          capturedWidget: _captured,
+          params: widget.glassParams,
+          glassPosition: widget.glassPosition!,
+        ),
+      ]);
     } else {
       child = widget.child;
     }
@@ -170,8 +170,8 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
   @override
   void initState() {
     super.initState();
-    widget.controller._setController(
-        _openGlass, _closeGlass, _setDistortion, _setDiameter);
+    widget.controller
+        ._setController(_openGlass, _closeGlass, _setDistortion, _setDiameter);
     _captured = CapturedWidget();
     _childKey = GlobalKey();
     _glassHandle = GlobalKey();
@@ -184,13 +184,13 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
 
     try {
       RenderRepaintBoundary? boundary =
-      widgetKey.currentContext?.findRenderObject() as RenderRepaintBoundary;
+          widgetKey.currentContext?.findRenderObject() as RenderRepaintBoundary;
       if (_captureRetry > 15) completer.complete(false);
 
       image = await boundary.toImage();
 
       _captured.byteData =
-      await image.toByteData(format: ui.ImageByteFormat.rawRgba);
+          await image.toByteData(format: ui.ImageByteFormat.rawRgba);
       _captured.size = Size(image.width.toDouble(), image.height.toDouble());
 
       if (_captureRetry > 1) {
@@ -216,7 +216,6 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
     return completer.future;
   }
 
-
   // sets glass distorion and magnification
   _setDistortion(double distortion, double magnification) {
     Interface().setShiftMat(distortion, magnification);
@@ -229,8 +228,7 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
   _setDiameter(int diameter) {
     widget.glassParams.diameter = diameter;
     Interface().setBmpHeaderSize(
-        widget.glassParams.diameter,
-        widget.glassParams.diameter);
+        widget.glassParams.diameter, widget.glassParams.diameter);
     _glassHandle.currentState?.refreshImage();
     setState(() {});
   }
@@ -263,4 +261,3 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
     });
   }
 }
-

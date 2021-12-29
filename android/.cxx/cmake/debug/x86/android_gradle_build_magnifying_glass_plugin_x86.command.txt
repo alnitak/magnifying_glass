@@ -1,0 +1,7 @@
+Executable : C:\Users\deimos\AppData\Local\Android\sdk\cmake\3.10.2.4988404\bin\ninja.exe
+arguments : 
+-C
+C:\workspace\magnifying_glass\android\.cxx\cmake\debug\x86
+magnifying_glass_plugin
+jvmArgs : 
+

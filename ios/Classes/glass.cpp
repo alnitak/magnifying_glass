@@ -6,7 +6,17 @@
     #include <android/log.h>
 #endif
 
+#ifndef M_PI
+#define M_PI 3.1415926535
+#endif
+
+#ifdef _WIN32
+#define FFI extern "C" __declspec(dllexport)
+#pragma warning ( disable : 4310 )
+#else
 #define FFI extern "C" __attribute__((visibility("default"))) __attribute__((used))
+#endif
+
 #define BYTES_PER_PIXEL 4
 #define RGBA32_HEADER_SIZE 122
 
@@ -104,8 +114,8 @@ FFI void setShiftMat(double distortion = 1.0, double mag = 1.0) {
             // test random [-5, 5] pixel shift
             // shiftingMatX[y * subImgWidth + x] = ((rand() % 2)*2 - 1) * 5;
             // shiftingMatY[y * subImgWidth + x] = ((rand() % 2)*2 - 1) * 5;
-            shiftingMatX[y * subImgWidth + x] = dx + (cos(angle) * newDistance);
-            shiftingMatY[y * subImgWidth + x] = dy + (sin(angle) * newDistance);
+            shiftingMatX[y * subImgWidth + x] = (int32_t)(dx + (cos(angle) * newDistance));
+            shiftingMatY[y * subImgWidth + x] = (int32_t)(dy + (sin(angle) * newDistance));
         }
     }
 }
@@ -230,7 +240,6 @@ FFI uint8_t *getSubImage(int32_t topLeftX, int32_t topLeftY, int32_t width) {
     int_fast32_t subImgY;
     for (int_fast32_t y = topLeftY; y < topLeftY + width; y++) {
         for (int_fast32_t x = topLeftX; x < topLeftX + width; x++) {
-//            uint32_t c = getPixel(x, y);
             subImgX = x - topLeftX;
             subImgY = y - topLeftY;
             uint32_t c = getPixel(

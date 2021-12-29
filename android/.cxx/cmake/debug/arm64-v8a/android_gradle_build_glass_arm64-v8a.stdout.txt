@@ -1,2 +1,0 @@
-ninja: Entering directory `/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/arm64-v8a'
-ninja: no work to do.
