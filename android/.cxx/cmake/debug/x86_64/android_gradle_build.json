@@ -1,39 +1,39 @@
 {
   "stringTable": {
-    "0": "C:/workspace/magnifying_glass/android/.cxx/cmake/debug/x86_64",
-    "1": "--target=x86_64-none-linux-android21 --gcc-toolchain=C:/Users/deimos/AppData/Local/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64 --sysroot=C:/Users/deimos/AppData/Local/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/windows-x86_64/sysroot -Dmagnifying_glass_plugin_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -std=c++11 -fexceptions -frtti -O0 -fno-limit-debug-info -fPIC"
+    "0": "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86_64",
+    "1": "--target=x86_64-none-linux-android21 --gcc-toolchain=/home/deimos/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/deimos/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dmagnifying_glass_plugin_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -std=c++11 -fexceptions -frtti -O0 -fno-limit-debug-info -fPIC"
   },
   "buildFiles": [
-    "C:\\workspace\\magnifying_glass\\android\\CMakeLists.txt",
-    "C:\\Users\\deimos\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\android.toolchain.cmake",
-    "C:\\Users\\deimos\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\build\\cmake\\platforms.cmake"
+    "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/CMakeLists.txt",
+    "/home/deimos/Android/Sdk/ndk/21.1.6352462/build/cmake/android.toolchain.cmake",
+    "/home/deimos/Android/Sdk/ndk/21.1.6352462/build/cmake/platforms.cmake"
   ],
   "cleanCommands": [
-    "C:\\Users\\deimos\\AppData\\Local\\Android\\sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\workspace\\magnifying_glass\\android\\.cxx\\cmake\\debug\\x86_64\" clean"
+    "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86_64\" clean"
   ],
-  "buildTargetsCommand": "C:\\Users\\deimos\\AppData\\Local\\Android\\sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe  -C \"C:\\workspace\\magnifying_glass\\android\\.cxx\\cmake\\debug\\x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "buildTargetsCommand": "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
   "libraries": {
     "magnifying_glass_plugin-Debug-x86_64": {
-      "buildCommand": "C:\\Users\\deimos\\AppData\\Local\\Android\\sdk\\cmake\\3.10.2.4988404\\bin\\ninja.exe -C \"C:\\workspace\\magnifying_glass\\android\\.cxx\\cmake\\debug\\x86_64\" magnifying_glass_plugin",
+      "buildCommand": "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/cmake/debug/x86_64\" magnifying_glass_plugin",
       "buildType": "debug",
-      "toolchain": "190765117",
+      "toolchain": "543931094",
       "abi": "x86_64",
       "artifactName": "magnifying_glass_plugin",
       "files": [
         {
-          "src": "C:\\workspace\\magnifying_glass\\ios\\Classes\\glass.cpp",
+          "src": "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/ios/Classes/glass.cpp",
           "flagsOrdinal": 1,
           "workingDirectoryOrdinal": 0
         }
       ],
       "headers": [],
-      "output": "C:\\workspace\\magnifying_glass\\example\\build\\magnifying_glass\\intermediates\\cmake\\debug\\obj\\x86_64\\libmagnifying_glass_plugin.so",
+      "output": "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cmake/debug/obj/x86_64/libmagnifying_glass_plugin.so",
       "runtimeFiles": []
     }
   },
   "toolchains": {
-    "190765117": {
-      "cppCompilerExecutable": "C:\\Users\\deimos\\AppData\\Local\\Android\\Sdk\\ndk\\21.1.6352462\\toolchains\\llvm\\prebuilt\\windows-x86_64\\bin\\clang++.exe"
+    "543931094": {
+      "cppCompilerExecutable": "/home/deimos/Android/Sdk/ndk/21.1.6352462/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++"
     }
   },
   "cFileExtensions": [],

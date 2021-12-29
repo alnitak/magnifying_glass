@@ -1,6 +1,7 @@
 # MagnifyingGlass Flutter plugin
 
 Flutter real-time magnifying glass lens widget with Barrel/Pincushion distortion.
+Works on Android, iOS and desktop. Doesn't work yet on web (help needed with web FFI).
 
 ![Screenshot](https://github.com/alnitak/magnifying_glass/blob/master/img/magnifying_glass.gif?raw=true "Magnifying Glass Demo")
 

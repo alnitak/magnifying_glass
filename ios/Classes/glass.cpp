@@ -39,7 +39,7 @@ int32_t *shiftingMatY = nullptr;
 double distortionPower = 1.0;
 double magnification = 1.0;
 
-// TODO width=height => use only ie diameter
+// TODO width=height => use only ie 'diameter'
 
 
 double myAtan2(const double y, const double x)
@@ -72,7 +72,7 @@ FFI void setParameters(double distortion, double mag) {
 
 /**
  *
- * @param distortion  about in the range -0.0001 ~ 0.0001
+ * @param distortion  about in the range -1.0 ~ 1.0
  */
 FFI void setShiftMat(double distortion = 1.0, double mag = 1.0) {
     if (subImgWidth == 0 || subImgHeight == 0) return;
