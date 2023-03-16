@@ -1,3 +1,6 @@
+## [1.0.4] - 16 Mar 2023
+* added border thickness and color
+
 ## [1.0.3] - 30 Dec 2021
 * Fixed MacOS build
 

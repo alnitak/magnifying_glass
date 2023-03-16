@@ -42,12 +42,14 @@ class _MyHomePageState extends State<MyHomePage> {
     return MagnifyingGlass(
       controller: magnifyingGlassController,
       glassPosition: glassPosition.value,
+      borderThickness: 8.0,
+      borderColor: Colors.black,
       glassParams: GlassParams(
         // startingPosition: Offset(150, 150),
         diameter: diameter.value,
         distortion: distortion.value,
         magnification: magnification.value,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
       ),
       child: Scaffold(
         body: SingleChildScrollView(
@@ -59,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
               /// Diameter
               Row(
                 children: [
-                  Text('Diameter'),
+                  const Text('Diameter'),
                   ValueListenableBuilder<int>(
                       valueListenable: diameter,
                       builder: (_, _diameter, __) {
@@ -83,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
               /// Distortion
               Row(
                 children: [
-                  Text('Distortion'),
+                  const Text('Distortion'),
                   ValueListenableBuilder<double>(
                       valueListenable: distortion,
                       builder: (_, _distortion, __) {
@@ -107,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
               /// Magnification
               Row(
                 children: [
-                  Text('Magnification'),
+                  const Text('Magnification'),
                   ValueListenableBuilder<double>(
                       valueListenable: magnification,
                       builder: (_, _magnification, __) {

@@ -1,28 +1,35 @@
-import 'dart:io';
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'dart:ui' as ui;
 
 import '../magnifying_glass.dart';
 import 'interface.dart';
 
 class GlassHandle extends StatefulWidget {
-  // where the widget image is stored
+  /// where the widget image is stored
   final CapturedWidget capturedWidget;
 
-  // glass parameters
+  /// glass parameters
   final GlassParams params;
 
-  // glass position
+  /// glass position
   final GlassPosition glassPosition;
+
+  /// border thickness
+  final double borderThickness;
+
+  /// border color
+  final Color borderColor;
 
   const GlassHandle({
     Key? key,
     required this.capturedWidget,
     required this.params,
     this.glassPosition = GlassPosition.touchPosition,
+    required this.borderThickness,
+    required this.borderColor,
   }) : super(key: key);
 
   @override
@@ -30,29 +37,29 @@ class GlassHandle extends StatefulWidget {
 }
 
 class GlassHandleState extends State<GlassHandle> {
-  // list of uchar to store image under the glass
+  /// list of uchar to store image under the glass
   late Uint8List subImg;
 
-  // computed Image widget
+  /// computed Image widget
   ValueNotifier<Image>? img;
 
-  // testing compute time
-  // late Stopwatch stopwatch;
+  /// testing compute time
+  /// late Stopwatch stopwatch;
 
-  // starting position to grab [subImg]
+  /// starting position to grab [subImg]
   late Offset startPos;
 
-  // position of the glass when it is not moved by finger
+  /// position of the glass when it is not moved by finger
   late Offset stickyPos;
 
-  // screen size used to place glass when not using GlassPosition.touchPosition
+  /// screen size used to place glass when not using GlassPosition.touchPosition
   late Size screenSize;
 
   @override
   void initState() {
     super.initState();
 
-    // stopwatch = Stopwatch();
+    /// stopwatch = Stopwatch();
     startPos = Offset.zero;
 
     Interface().storeImg(
@@ -88,13 +95,13 @@ class GlassHandleState extends State<GlassHandle> {
 
   @override
   Widget build(BuildContext context) {
-    // test frame compute time.
-    // No more tests nedded? It is fast enough (usually <20 ms)
-    // WidgetsBinding.instance?.addPersistentFrameCallback((timeStamp) {
-    //   stopwatch.stop();
-    //   print('************** ${stopwatch.elapsedMilliseconds}');
-    //   stopwatch.reset();
-    // });
+    /// test frame compute time.
+    /// No more tests needed? It is fast enough (usually <20 ms)
+    /// WidgetsBinding.instance?.addPersistentFrameCallback((timeStamp) {
+    ///   stopwatch.stop();
+    ///   print('************** ${stopwatch.elapsedMilliseconds}');
+    ///   stopwatch.reset();
+    /// });
 
     screenSize = MediaQuery.of(context).size;
     widget.params.startingPosition ??=
@@ -145,7 +152,7 @@ class GlassHandleState extends State<GlassHandle> {
 
     return ValueListenableBuilder<Image>(
         valueListenable: img!,
-        builder: (_, _img, __) {
+        builder: (_, image, __) {
           return Transform.translate(
               transformHitTests: true,
               offset: widget.glassPosition == GlassPosition.touchPosition
@@ -163,7 +170,8 @@ class GlassHandleState extends State<GlassHandle> {
                   widget.params.startingPosition = e.position;
                   startPos = startPos + e.localDelta;
                   if (!mounted) return;
-                  // stopwatch.start();
+
+                  /// stopwatch.start();
                   img!.value = Image.memory(
                     Interface().getSubImage(startPos.dx.toInt(),
                         startPos.dy.toInt(), widget.params.diameter),
@@ -174,11 +182,13 @@ class GlassHandleState extends State<GlassHandle> {
                 child: Padding(
                   padding: widget.params.padding,
                   child: CustomPaint(
-                    painter: GlassShadow(),
+                    painter: GlassShadow(
+                        borderColor: widget.borderColor,
+                        borderThickness: widget.borderThickness),
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(
                             widget.params.diameter.toDouble()),
-                        child: _img),
+                        child: image),
                   ),
                 ),
               ));
@@ -188,16 +198,34 @@ class GlassHandleState extends State<GlassHandle> {
 
 /// Painter class to drop shadow under the glass
 class GlassShadow extends CustomPainter {
+  /// border thickness
+  final double borderThickness;
+
+  /// border color
+  final Color borderColor;
+
+  GlassShadow({
+    required this.borderThickness,
+    required this.borderColor,
+  });
+
   @override
   void paint(Canvas canvas, Size size) {
     var path = Path();
+    var paint = Paint()
+      ..strokeWidth = borderThickness
+      ..color = borderColor
+      ..style = PaintingStyle.stroke;
+
     path.addOval(
         ui.Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
+
     canvas.drawShadow(path, const Color(0xFF000000), 8, false);
+    canvas.drawOval(Rect.fromLTWH(0, 0, size.width, size.height), paint);
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return true;
+    return false;
   }
 }

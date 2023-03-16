@@ -4,8 +4,8 @@ import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 import 'src/glass.dart';
 import 'src/interface.dart';
@@ -29,18 +29,22 @@ class MagnifyingGlassController {
     _setDiameter = setDiameter;
   }
 
+  /// call to open  the glass
   openGlass() {
     if (_openGlass != null) _openGlass!();
   }
 
+  /// call to close the glass
   closeGlass() {
     if (_closeGlass != null) _closeGlass!();
   }
 
+  /// set distortion and magnification
   setDistortion(double distortion, double magnification) {
     if (_setDistortion != null) _setDistortion!(distortion, magnification);
   }
 
+  /// set the diameter
   setDiameter(int diameter) {
     if (_setDiameter != null) _setDiameter!(diameter);
   }
@@ -68,23 +72,23 @@ enum GlassPosition {
 
 /// Glass parameter
 class GlassParams {
-  // start position where the glass is positioned
+  /// start position where the glass is positioned
   Offset? startingPosition;
 
-  // glass diameter
+  /// glass diameter
   int diameter;
 
-  // glass magnification.
-  // 1 means no magnification
-  // >1 means magnification
-  // <1 means shrinking
+  /// glass magnification.
+  /// 1 means no magnification
+  /// >1 means magnification
+  /// <1 means shrinking
   double magnification;
 
-  // Barrel/Pincushion distortion power
-  // 0 means no distortion
+  /// Barrel/Pincushion distortion power
+  /// 0 means no distortion
   double distortion;
 
-  // Padding surrounding the glass to enlarge touching area
+  /// Padding surrounding the glass to enlarge touching area
   final EdgeInsets padding;
 
   GlassParams(
@@ -96,18 +100,25 @@ class GlassParams {
       : assert(diameter >= 10, 'Glass diameter should be almost 10');
 }
 
+/// main widget
 class MagnifyingGlass extends StatefulWidget {
-  // child that will be used by the glass
+  /// child that will be used by the glass
   final Widget child;
 
-  // glass parameters
+  /// glass parameters
   final GlassParams glassParams;
 
-  // glass controller
+  /// glass controller
   final MagnifyingGlassController controller;
 
-  // glass position
+  /// glass position
   final GlassPosition? glassPosition;
+
+  /// border thickness
+  final double borderThickness;
+
+  /// border color
+  final Color borderColor;
 
   const MagnifyingGlass({
     Key? key,
@@ -115,6 +126,8 @@ class MagnifyingGlass extends StatefulWidget {
     required this.glassParams,
     required this.child,
     this.glassPosition = GlassPosition.touchPosition,
+    this.borderThickness = 0.0,
+    this.borderColor = Colors.transparent,
   }) : super(key: key);
 
   @override
@@ -122,22 +135,22 @@ class MagnifyingGlass extends StatefulWidget {
 }
 
 class _MagnifyingGlassState extends State<MagnifyingGlass> {
-  // key used to grab the image
+  /// key used to grab the image
   late GlobalKey _childKey;
 
-  // key used to refresh GlassHandle
+  /// key used to refresh GlassHandle
   late GlobalKey<GlassHandleState> _glassHandle;
 
-  // used to capture widget image
+  /// used to capture widget image
   final Completer<bool> completer = Completer<bool>();
 
-  // where the widget image is stored
+  /// where the widget image is stored
   late CapturedWidget _captured;
 
-  // capture image retry counter
+  /// capture image retry counter
   int _captureRetry = 0;
 
-  // state of the glass
+  /// state of the glass
   bool _isGlassVisible = false;
 
   @override
@@ -155,6 +168,8 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
           capturedWidget: _captured,
           params: widget.glassParams,
           glassPosition: widget.glassPosition!,
+          borderColor: widget.borderColor,
+          borderThickness: widget.borderThickness,
         ),
       ]);
     } else {
@@ -177,8 +192,8 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
     _glassHandle = GlobalKey();
   }
 
-  // TODO: find a better way to capture the widget when the issue will
-  // be fixed? https://github.com/flutter/flutter/issues/22308
+  /// TODO: find a better way to capture the widget when the issue will
+  /// be fixed? https://github.com/flutter/flutter/issues/22308
   Future<bool> _captureWidget(GlobalKey widgetKey) async {
     ui.Image? image;
 
@@ -216,7 +231,7 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
     return completer.future;
   }
 
-  // sets glass distorion and magnification
+  /// sets glass distorion and magnification
   _setDistortion(double distortion, double magnification) {
     Interface().setShiftMat(distortion, magnification);
     widget.glassParams.distortion = distortion;
@@ -224,7 +239,7 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
     _glassHandle.currentState?.refreshImage();
   }
 
-  // sets glass diameter
+  /// sets glass diameter
   _setDiameter(int diameter) {
     widget.glassParams.diameter = diameter;
     Interface().setBmpHeaderSize(
@@ -233,7 +248,7 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
     setState(() {});
   }
 
-  // open the glass. If already visible then close it
+  /// open the glass. If already visible then close it
   _openGlass() {
     if (_isGlassVisible) {
       _closeGlass();
@@ -253,7 +268,7 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
     });
   }
 
-  // close the glass
+  /// close the glass
   _closeGlass() {
     if (!_isGlassVisible) return;
     setState(() {

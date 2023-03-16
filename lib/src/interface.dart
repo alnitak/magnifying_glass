@@ -7,12 +7,12 @@ import 'package:ffi/ffi.dart';
 /// Bind C functions to Dart
 class Interface {
   static Interface? _instance;
-  var _setParameter;
-  var _setBmpHeaderSize;
-  var _setDistortion;
-  var _storeImg;
-  var _getSubImage;
-  var _freeImg;
+  Pointer<Void> Function(double, double)? _setParameter;
+  Pointer<Void> Function(int, int)? _setBmpHeaderSize;
+  Pointer<Void> Function(double, double)? _setDistortion;
+  Pointer<Void> Function(int, int, Pointer<Uint8>)? _storeImg;
+  Pointer<Uint8> Function(int, int, int)? _getSubImage;
+  Pointer<Void> Function()? _freeImg;
 
   DynamicLibrary nativeLib = Platform.isAndroid
       ? DynamicLibrary.open("libmagnifying_glass_plugin.so")
@@ -73,18 +73,18 @@ class Interface {
 
   /// this will store the header for a bmp image
   setBmpHeaderSize(int width, int height) {
-    _setBmpHeaderSize(width, height);
+    _setBmpHeaderSize!(width, height);
   }
 
   /// just set distortion and magnification parameters
   setParameter(double distortion, double magnification) {
-    _setParameter(distortion, magnification);
+    _setParameter!(distortion, magnification);
   }
 
   /// set distortion and magnification parameters, and
   /// compute shifting matrices
   setShiftMat(double distortion, double magnification) {
-    _setDistortion(distortion, magnification);
+    _setDistortion!(distortion, magnification);
   }
 
   /// Store the captured widget
@@ -94,17 +94,17 @@ class Interface {
     for (var i = 0; i < imgBuffer.length; i++) {
       buffer.elementAt(i).value = imgBuffer[i];
     }
-    _storeImg(width, height, buffer);
+    _storeImg!(width, height, buffer);
   }
 
   /// get glass image to display with current parameters
   Uint8List getSubImage(int topLeftX, int topLeftY, int width) {
-    late Pointer<Uint8> buffer = _getSubImage(topLeftX, topLeftY, width);
+    Pointer<Uint8> buffer = _getSubImage!(topLeftX, topLeftY, width);
     return buffer.asTypedList(width * width * 4 + 122);
   }
 
   /// free memory
   freeImg() {
-    _freeImg();
+    _freeImg!();
   }
 }
