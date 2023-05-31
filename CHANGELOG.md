@@ -1,3 +1,6 @@
+## [1.0.5] - 31 May 2023
+* fixed Android build
+
 ## [1.0.4] - 16 Mar 2023
 * added border thickness and color
 
