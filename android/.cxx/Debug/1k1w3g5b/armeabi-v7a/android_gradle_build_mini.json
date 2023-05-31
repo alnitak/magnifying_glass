@@ -1,0 +1,36 @@
+{
+  "buildFiles": [
+    "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja",
+      "-v",
+      "-C",
+      "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/Debug/1k1w3g5b/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja",
+    "-v",
+    "-C",
+    "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/Debug/1k1w3g5b/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "magnifying_glass_plugin-Debug-armeabi-v7a": {
+      "artifactName": "magnifying_glass_plugin",
+      "buildCommandComponents": [
+        "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-v",
+        "-C",
+        "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/Debug/1k1w3g5b/armeabi-v7a",
+        "magnifying_glass_plugin"
+      ],
+      "abi": "armeabi-v7a",
+      "output": "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cxx/Debug/1k1w3g5b/obj/armeabi-v7a/libmagnifying_glass_plugin.so",
+      "runtimeFiles": []
+    }
+  }
+}

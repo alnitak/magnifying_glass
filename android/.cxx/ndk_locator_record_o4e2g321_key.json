@@ -1,0 +1,9 @@
+{
+  "sdkFolder": "/home/deimos/Android/Sdk",
+  "sideBySideNdkFolderNames": [
+    "21.1.6352462",
+    "android-ndk-r14b",
+    "22.0.6917172",
+    "21.3.6528147"
+  ]
+}

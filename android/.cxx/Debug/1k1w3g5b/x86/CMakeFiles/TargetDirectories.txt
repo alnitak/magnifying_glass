@@ -1,0 +1,3 @@
+/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/Debug/1k1w3g5b/x86/CMakeFiles/rebuild_cache.dir
+/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/Debug/1k1w3g5b/x86/CMakeFiles/edit_cache.dir
+/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/Debug/1k1w3g5b/x86/CMakeFiles/magnifying_glass_plugin.dir

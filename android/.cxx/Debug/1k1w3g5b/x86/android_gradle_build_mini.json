@@ -1,0 +1,36 @@
+{
+  "buildFiles": [
+    "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja",
+      "-v",
+      "-C",
+      "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/Debug/1k1w3g5b/x86",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja",
+    "-v",
+    "-C",
+    "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/Debug/1k1w3g5b/x86",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "magnifying_glass_plugin-Debug-x86": {
+      "artifactName": "magnifying_glass_plugin",
+      "buildCommandComponents": [
+        "/home/deimos/Android/Sdk/cmake/3.10.2.4988404/bin/ninja",
+        "-v",
+        "-C",
+        "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/android/.cxx/Debug/1k1w3g5b/x86",
+        "magnifying_glass_plugin"
+      ],
+      "abi": "x86",
+      "output": "/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cxx/Debug/1k1w3g5b/obj/x86/libmagnifying_glass_plugin.so",
+      "runtimeFiles": []
+    }
+  }
+}
