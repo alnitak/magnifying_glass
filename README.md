@@ -45,6 +45,8 @@ Make [MagnifyingGlass] widget as the parent of the widget you wish to be used (u
 **glassParams**|GlassParams|class to set lens parameters|
 **borderColor**|Color|border color|
 **borderThickness**|double|border thickness|
+**elevation**|double|shadow elevation|
+**shadowOffset**|Offset|shadow offset|
 
 <br>
 
