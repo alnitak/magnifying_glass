@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../magnifying_glass.dart';
-import 'interface.dart';
+import 'pinch_barrel.dart';
 
 class GlassHandle extends StatefulWidget {
   /// where the widget image is stored
@@ -23,6 +23,12 @@ class GlassHandle extends StatefulWidget {
   /// border color
   final Color borderColor;
 
+  /// Shadow elevation
+  final double elevation;
+
+  /// Shadow offset
+  final Offset shadowOffset;
+
   const GlassHandle({
     Key? key,
     required this.capturedWidget,
@@ -30,6 +36,8 @@ class GlassHandle extends StatefulWidget {
     this.glassPosition = GlassPosition.touchPosition,
     required this.borderThickness,
     required this.borderColor,
+    required this.elevation,
+    required this.shadowOffset,
   }) : super(key: key);
 
   @override
@@ -62,32 +70,30 @@ class GlassHandleState extends State<GlassHandle> {
     /// stopwatch = Stopwatch();
     startPos = Offset.zero;
 
-    Interface().storeImg(
+    PinchBarrel().storeImg(
         widget.capturedWidget.size!.width.toInt(),
         widget.capturedWidget.size!.height.toInt(),
         widget.capturedWidget.byteData!.buffer.asUint8List());
 
-    Interface()
+    PinchBarrel()
         .setBmpHeaderSize(widget.params.diameter, widget.params.diameter);
-  }
-
-  @override
-  void dispose() {
-    Interface().freeImg();
-    super.dispose();
   }
 
   /// refresh computed image. Used ie when changing parameters
   refreshImage() {
     img!.value = Image.memory(
-      Interface().getSubImage(
-          (widget.params.startingPosition!.dx.toInt() -
-                  (widget.params.diameter / 2))
-              .toInt(),
-          (widget.params.startingPosition!.dy.toInt() -
-                  (widget.params.diameter / 2))
-              .toInt(),
-          widget.params.diameter),
+      PinchBarrel()
+          .getSubImage(
+              (widget.params.startingPosition!.dx.toInt() -
+                      (widget.params.diameter / 2))
+                  .toInt(),
+              (widget.params.startingPosition!.dy.toInt() -
+                      (widget.params.diameter / 2))
+                  .toInt(),
+              widget.params.diameter)!
+          .bmp
+          .buffer
+          .asUint8List(),
       fit: BoxFit.fill,
       gaplessPlayback: true,
     );
@@ -103,17 +109,25 @@ class GlassHandleState extends State<GlassHandle> {
     ///   stopwatch.reset();
     /// });
 
-    screenSize = MediaQuery.of(context).size;
+    screenSize = MediaQuery.sizeOf(context);
     widget.params.startingPosition ??=
         Offset(screenSize.width / 2.0, screenSize.height / 2.0);
     if (img == null) {
-      subImg = Interface().getSubImage(
-          (widget.params.startingPosition!.dx - (widget.params.diameter / 2))
-              .toInt(),
-          (widget.params.startingPosition!.dy - (widget.params.diameter / 2))
-              .toInt(),
-          widget.params.diameter);
-      img = ValueNotifier<Image>(Image.memory(subImg, fit: BoxFit.fill));
+      subImg = PinchBarrel()
+          .getSubImage(
+              (widget.params.startingPosition!.dx -
+                      (widget.params.diameter / 2))
+                  .toInt(),
+              (widget.params.startingPosition!.dy -
+                      (widget.params.diameter / 2))
+                  .toInt(),
+              widget.params.diameter)!
+          .bmp;
+      img = ValueNotifier<Image>(Image.memory(
+        subImg,
+        fit: BoxFit.fill,
+        gaplessPlayback: true,
+      ));
     }
 
     switch (widget.glassPosition) {
@@ -173,8 +187,15 @@ class GlassHandleState extends State<GlassHandle> {
 
                   /// stopwatch.start();
                   img!.value = Image.memory(
-                    Interface().getSubImage(startPos.dx.toInt(),
-                        startPos.dy.toInt(), widget.params.diameter),
+                    PinchBarrel()
+                        .getSubImage(
+                          startPos.dx.toInt(),
+                          startPos.dy.toInt(),
+                          widget.params.diameter,
+                        )!
+                        .bmp
+                        .buffer
+                        .asUint8List(),
                     fit: BoxFit.fill,
                     gaplessPlayback: true,
                   );
@@ -183,12 +204,17 @@ class GlassHandleState extends State<GlassHandle> {
                   padding: widget.params.padding,
                   child: CustomPaint(
                     painter: GlassShadow(
-                        borderColor: widget.borderColor,
-                        borderThickness: widget.borderThickness),
+                      borderColor: widget.borderColor,
+                      borderThickness: widget.borderThickness,
+                      elevation: widget.elevation,
+                      shadowOffset: widget.shadowOffset,
+                    ),
                     child: ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                            widget.params.diameter.toDouble()),
-                        child: image),
+                      borderRadius: BorderRadius.circular(
+                        widget.params.diameter.toDouble(),
+                      ),
+                      child: image,
+                    ),
                   ),
                 ),
               ));
@@ -204,24 +230,35 @@ class GlassShadow extends CustomPainter {
   /// border color
   final Color borderColor;
 
+  /// Shadow elevation
+  final double elevation;
+
+  /// Shadow offset
+  final Offset shadowOffset;
+
   GlassShadow({
     required this.borderThickness,
     required this.borderColor,
+    required this.elevation,
+    required this.shadowOffset,
   });
 
   @override
   void paint(Canvas canvas, Size size) {
     var path = Path();
-    var paint = Paint()
-      ..strokeWidth = borderThickness
-      ..color = borderColor
-      ..style = PaintingStyle.stroke;
 
     path.addOval(
         ui.Rect.fromPoints(Offset.zero, Offset(size.width, size.height)));
+    path = path.shift(shadowOffset);
 
-    canvas.drawShadow(path, const Color(0xFF000000), 8, false);
-    canvas.drawOval(Rect.fromLTWH(0, 0, size.width, size.height), paint);
+    canvas.drawShadow(path, const Color(0xFF000000), elevation, true);
+
+    canvas.drawOval(
+        Rect.fromLTWH(0, 0, size.width, size.height),
+        Paint()
+          ..strokeWidth = borderThickness
+          ..color = borderColor
+          ..style = PaintingStyle.stroke);
   }
 
   @override

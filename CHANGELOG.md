@@ -1,3 +1,8 @@
+## [2.0.0] - 29 Aug 2023
+* C code rewritten into Dart
+* now web is supported
+* added `elevation` an `shadowOffset`
+
 ## [1.0.5] - 31 May 2023
 * fixed Android build
 

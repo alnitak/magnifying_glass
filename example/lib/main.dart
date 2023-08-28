@@ -44,6 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
       glassPosition: glassPosition.value,
       borderThickness: 8.0,
       borderColor: Colors.black,
+      elevation: 12,
+      shadowOffset: const Offset(8, 8),
       glassParams: GlassParams(
         // startingPosition: Offset(150, 150),
         diameter: diameter.value,
@@ -64,10 +66,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Text('Diameter'),
                   ValueListenableBuilder<int>(
                       valueListenable: diameter,
-                      builder: (_, _diameter, __) {
+                      builder: (_, diam, __) {
                         return Expanded(
                           child: Slider(
-                              value: _diameter.toDouble(),
+                              value: diam.toDouble(),
                               min: 10,
                               max: 300,
                               divisions: 29,
