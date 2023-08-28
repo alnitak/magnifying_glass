@@ -1,6 +1,0 @@
-# ninja log v5
-1	57	1640866576	CMakeFiles/magnifying_glass_plugin.dir/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/ios/Classes/glass.cpp.o	c47f25f5c4a90a74
-57	65	1640866576	/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cmake/debug/obj/x86_64/libmagnifying_glass_plugin.so	6f20dbc76eb28a86
-0	19	1640897785	/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cmake/debug/obj/x86_64/libmagnifying_glass_plugin.so	6f20dbc76eb28a86
-0	50	1680084199	CMakeFiles/magnifying_glass_plugin.dir/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/ios/Classes/glass.cpp.o	c47f25f5c4a90a74
-50	58	1680084199	/home/deimos/Documents/workspace/FLUTTER/libs/magnifying_glass/example/build/magnifying_glass/intermediates/cmake/debug/obj/x86_64/libmagnifying_glass_plugin.so	6f20dbc76eb28a86

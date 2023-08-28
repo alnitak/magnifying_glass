@@ -1,46 +1,24 @@
 name: magnifying_glass
 description: Flutter real-time magnifying glass lens widget with Barrel/Pincushion distortion.
-version: 1.0.5
+version: 2.0.0
 homepage: https://github.com/alnitak/magnifying_glass
 issue_tracker: https://github.com/alnitak/magnifying_glass/issues
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
-  flutter: ">=2.5.0"
+  sdk: '>=3.1.0 <4.0.0'
+  flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-#  flutter_web_plugins:
-#    sdk: flutter
-
-  # https://pub.dev/packages/ffi
-  ffi: ^2.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.2
 
 screenshots:
   - description: "Magnifying glass logo"
     path: img/screenshot.png
 
 flutter:
-  plugin:
-    platforms:
-      android:
-        package: com.bavagnoli.magnifying_glass
-        pluginClass: MagnifyingGlassPlugin
-      ios:
-        pluginClass: MagnifyingGlassPlugin
-      linux:
-        pluginClass: MagnifyingGlassPlugin
-      macos:
-        pluginClass: MagnifyingGlassPlugin
-      windows:
-        pluginClass: MagnifyingGlassPlugin
-
-#      web:
-#        pluginClass: MagnifyingGlassWeb
-#        fileName: magnifying_glass_web.dart
