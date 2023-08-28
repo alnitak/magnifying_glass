@@ -5,6 +5,8 @@ Works on Android, iOS and desktop. Doesn't work yet on web (help needed with web
 
 ![Screenshot](https://github.com/alnitak/magnifying_glass/blob/master/img/magnifying_glass.gif?raw=true "Magnifying Glass Demo")
 
+<a href="https://www.buymeacoffee.com/marcobavag" target="_blank"><img align="left" src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a><br/><br/>
+
 ## Getting Started
 
 Make [MagnifyingGlass] widget as the parent of the widget you wish to be used (usually MyHomePage).
