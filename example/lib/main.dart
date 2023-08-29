@@ -90,10 +90,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Text('Distortion'),
                   ValueListenableBuilder<double>(
                       valueListenable: distortion,
-                      builder: (_, _distortion, __) {
+                      builder: (_, d, __) {
                         return Expanded(
                           child: Slider(
-                              value: _distortion,
+                              value: d,
                               min: -3.0,
                               max: 3.0,
                               divisions: 60,
@@ -114,10 +114,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Text('Magnification'),
                   ValueListenableBuilder<double>(
                       valueListenable: magnification,
-                      builder: (_, _magnification, __) {
+                      builder: (_, mag, __) {
                         return Expanded(
                           child: Slider(
-                              value: _magnification,
+                              value: mag,
                               min: -2.0,
                               max: 2.0,
                               divisions: 100,
@@ -135,20 +135,20 @@ class _MyHomePageState extends State<MyHomePage> {
               /// Glass Position top
               ValueListenableBuilder<GlassPosition>(
                   valueListenable: glassPosition,
-                  builder: (_, _glassPosition, __) {
+                  builder: (_, pos, __) {
                     return Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Checkbox(
-                          value: _glassPosition == GlassPosition.topLeft,
+                          value: pos == GlassPosition.topLeft,
                           onChanged: (bool? value) {
                             glassPosition.value = GlassPosition.topLeft;
                             setState(() {});
                           },
                         ),
                         Checkbox(
-                          value: _glassPosition == GlassPosition.topRight,
+                          value: pos == GlassPosition.topRight,
                           onChanged: (bool? value) {
                             glassPosition.value = GlassPosition.topRight;
                             setState(() {});
@@ -161,9 +161,9 @@ class _MyHomePageState extends State<MyHomePage> {
               /// Glass Position touch
               ValueListenableBuilder<GlassPosition>(
                   valueListenable: glassPosition,
-                  builder: (_, _glassPosition, __) {
+                  builder: (_, pos, __) {
                     return Checkbox(
-                      value: _glassPosition == GlassPosition.touchPosition,
+                      value: pos == GlassPosition.touchPosition,
                       onChanged: (bool? value) {
                         glassPosition.value = GlassPosition.touchPosition;
                         setState(() {});
@@ -174,20 +174,20 @@ class _MyHomePageState extends State<MyHomePage> {
               /// Glass Position top
               ValueListenableBuilder<GlassPosition>(
                   valueListenable: glassPosition,
-                  builder: (_, _glassPosition, __) {
+                  builder: (_, pos, __) {
                     return Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Checkbox(
-                          value: _glassPosition == GlassPosition.bottomLeft,
+                          value: pos == GlassPosition.bottomLeft,
                           onChanged: (bool? value) {
                             glassPosition.value = GlassPosition.bottomLeft;
                             setState(() {});
                           },
                         ),
                         Checkbox(
-                          value: _glassPosition == GlassPosition.bottomRight,
+                          value: pos == GlassPosition.bottomRight,
                           onChanged: (bool? value) {
                             glassPosition.value = GlassPosition.bottomRight;
                             setState(() {});

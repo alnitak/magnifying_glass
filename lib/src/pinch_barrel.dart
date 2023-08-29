@@ -24,22 +24,8 @@ class PinchBarrel {
     return _instance!;
   }
 
-  double myAtan2(int y, int x) {
-    if (y == 0) {
-      if (x >= 0) {
-        return 0.0;
-      } else {
-        return pi;
-      }
-    } else if (y < 0) {
-      return (atan2(y, x) + 2 * pi);
-    } else {
-      return atan2(y, x);
-    }
-  }
-
   /// just set distortion and magnification parameters
-  setParameter(double distortion, double mag) {
+  setParameters(double distortion, double mag) {
     distortionPower = distortion;
     magnification = mag;
   }
@@ -78,7 +64,7 @@ class PinchBarrel {
 
         newDistance =
             distance * (1 - distortion * distance * distance) * magnification;
-        angle = myAtan2(y - center, x - center);
+        angle = atan2(y - center, x - center);
 
         shiftingMatX[pos] = (dx + (cos(angle) * newDistance)).toInt();
         shiftingMatY[pos] = (dy + (sin(angle) * newDistance)).toInt();

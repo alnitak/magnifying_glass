@@ -165,7 +165,7 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
   Widget build(BuildContext context) {
     widget.controller
         ._setController(_openGlass, _closeGlass, _setDistortion, _setDiameter);
-    PinchBarrel().setParameter(
+    PinchBarrel().setParameters(
         widget.glassParams.distortion, widget.glassParams.magnification);
     Widget child;
     if (_isGlassVisible) {
