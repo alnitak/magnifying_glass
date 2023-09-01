@@ -1,3 +1,6 @@
+## [2.0.1] - 11 Sep 2023
+* updated README
+
 ## [2.0.0] - 29 Aug 2023
 * C code rewritten into Dart
 * now web is supported
