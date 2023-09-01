@@ -1,6 +1,6 @@
 name: magnifying_glass
 description: Flutter real-time magnifying glass lens widget with Barrel/Pincushion distortion.
-version: 2.0.0
+version: 2.0.1
 homepage: https://github.com/alnitak/magnifying_glass
 issue_tracker: https://github.com/alnitak/magnifying_glass/issues
 
