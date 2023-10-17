@@ -1,3 +1,6 @@
+## [2.1.0] - 17 Oct 2023
+* added refresh capture
+
 ## [2.0.1] - 11 Sep 2023
 * updated README
 

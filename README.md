@@ -41,7 +41,7 @@ Make [MagnifyingGlass] widget as the parent of the widget you wish to be used (u
 
 |Name|Type|Description|
 |:-------|:----------|:-----------|
-**controller**|MagnifyingGlassController|Let you control the glass state and parameters: <br>**openGlass()**<br>**closeGlass()**<br>**setDistortion(** *double distortion, double magnification* **)**<br>**setDiameter(** *int diameter* **)**|
+**controller**|MagnifyingGlassController|Let you control the glass state and parameters: <br>**openGlass()**<br>**closeGlass()**<br>**setDistortion(** *double distortion, double magnification* **)**<br>**setDiameter(** *int diameter* **)**<br>**refresh()**|
 **glassPosition**|enum|enum to set the touch behavior or sticky position|
 **glassParams**|GlassParams|class to set lens parameters|
 **borderColor**|Color|border color|

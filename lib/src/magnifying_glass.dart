@@ -16,17 +16,20 @@ class MagnifyingGlassController {
   VoidCallback? _closeGlass;
   Function(double distortion, double magnification)? _setDistortion;
   Function(int diameter)? _setDiameter;
+  Future<bool> Function()? _refresh;
 
   _setController(
     VoidCallback openGlass,
     VoidCallback closeGlass,
     Function(double distortion, double magnification) setDistortion,
     Function(int diameter) setDiameter,
+    Future<bool> Function() refresh,
   ) {
     _openGlass = openGlass;
     _closeGlass = closeGlass;
     _setDistortion = setDistortion;
     _setDiameter = setDiameter;
+    _refresh = refresh;
   }
 
   /// call to open  the glass
@@ -47,6 +50,11 @@ class MagnifyingGlassController {
   /// set the diameter
   setDiameter(int diameter) {
     if (_setDiameter != null) _setDiameter!(diameter);
+  }
+
+  // refresh the captured widget
+  Future<bool> refresh() async {
+    return _refresh!();
   }
 }
 
@@ -163,25 +171,27 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
 
   @override
   Widget build(BuildContext context) {
-    widget.controller
-        ._setController(_openGlass, _closeGlass, _setDistortion, _setDiameter);
+    widget.controller._setController(
+        _openGlass, _closeGlass, _setDistortion, _setDiameter, _refresh);
     PinchBarrel().setParameters(
         widget.glassParams.distortion, widget.glassParams.magnification);
     Widget child;
     if (_isGlassVisible) {
-      child = Stack(children: [
-        widget.child,
-        GlassHandle(
-          key: _glassHandle,
-          capturedWidget: _captured,
-          params: widget.glassParams,
-          glassPosition: widget.glassPosition!,
-          borderColor: widget.borderColor,
-          borderThickness: widget.borderThickness,
-          elevation: widget.elevation,
-          shadowOffset: widget.shadowOffset,
-        ),
-      ]);
+      child = Stack(
+        children: [
+          widget.child,
+          GlassHandle(
+            key: _glassHandle,
+            capturedWidget: _captured,
+            params: widget.glassParams,
+            glassPosition: widget.glassPosition!,
+            borderColor: widget.borderColor,
+            borderThickness: widget.borderThickness,
+            elevation: widget.elevation,
+            shadowOffset: widget.shadowOffset,
+          ),
+        ],
+      );
     } else {
       child = widget.child;
     }
@@ -195,8 +205,8 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
   @override
   void initState() {
     super.initState();
-    widget.controller
-        ._setController(_openGlass, _closeGlass, _setDistortion, _setDiameter);
+    widget.controller._setController(
+        _openGlass, _closeGlass, _setDistortion, _setDiameter, _refresh);
     _captured = CapturedWidget();
     _childKey = GlobalKey();
     _glassHandle = GlobalKey();
@@ -242,7 +252,7 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
   }
 
   /// sets glass distorion and magnification
-  _setDistortion(double distortion, double magnification) {
+  void _setDistortion(double distortion, double magnification) {
     PinchBarrel().setShiftMat(distortion, magnification);
     widget.glassParams.distortion = distortion;
     widget.glassParams.magnification = magnification;
@@ -250,7 +260,7 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
   }
 
   /// sets glass diameter
-  _setDiameter(int diameter) {
+  void _setDiameter(int diameter) {
     widget.glassParams.diameter = diameter;
     PinchBarrel().setBmpHeaderSize(
         widget.glassParams.diameter, widget.glassParams.diameter);
@@ -259,7 +269,7 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
   }
 
   /// open the glass. If already visible then close it
-  _openGlass() {
+  void _openGlass() {
     if (_isGlassVisible) {
       _closeGlass();
       setState(() {});
@@ -279,10 +289,17 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
   }
 
   /// close the glass
-  _closeGlass() {
+  void _closeGlass() {
     if (!_isGlassVisible) return;
     setState(() {
       _isGlassVisible = false;
     });
+  }
+
+  /// refresh captured image
+  Future<bool> _refresh() async {
+    _captured.size = null;
+    _captured.byteData = null;
+    return _captureWidget(_childKey);
   }
 }
