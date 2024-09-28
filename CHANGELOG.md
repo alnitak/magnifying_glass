@@ -1,3 +1,6 @@
+## [2.1.1] - 28 Sep 2024
+* update dependencies
+
 ## [2.1.0] - 17 Oct 2023
 * added refresh capture
 

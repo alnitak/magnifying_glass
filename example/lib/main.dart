@@ -201,7 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
                 'Phasellus dictum maximus tortor ac porta. Aenean aliquet '
                 'erat eu mi commodo, ut feugiat enim consectetur. ',
-                textScaleFactor: 1.3,
+                style: TextStyle(fontSize: 20),
                 textAlign: TextAlign.justify,
               ),
             ]),

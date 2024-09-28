@@ -1,5 +1,3 @@
-library magnifying_glass;
-
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
@@ -135,7 +133,7 @@ class MagnifyingGlass extends StatefulWidget {
   final Offset shadowOffset;
 
   const MagnifyingGlass({
-    Key? key,
+    super.key,
     required this.controller,
     required this.glassParams,
     required this.child,
@@ -144,7 +142,7 @@ class MagnifyingGlass extends StatefulWidget {
     this.borderColor = Colors.transparent,
     this.elevation = 8,
     this.shadowOffset = const Offset(8, 8),
-  }) : super(key: key);
+  });
 
   @override
   State<MagnifyingGlass> createState() => _MagnifyingGlassState();
@@ -276,8 +274,8 @@ class _MagnifyingGlassState extends State<MagnifyingGlass> {
       return;
     }
     _captureRetry = 0;
-    _captureWidget(_childKey).then((_) {
-      if (!_) {
+    _captureWidget(_childKey).then((success) {
+      if (!success) {
         _captured.size = null;
         _captured.byteData = null;
       } else {

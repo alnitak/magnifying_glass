@@ -30,7 +30,7 @@ class GlassHandle extends StatefulWidget {
   final Offset shadowOffset;
 
   const GlassHandle({
-    Key? key,
+    super.key,
     required this.capturedWidget,
     required this.params,
     this.glassPosition = GlassPosition.touchPosition,
@@ -38,7 +38,7 @@ class GlassHandle extends StatefulWidget {
     required this.borderColor,
     required this.elevation,
     required this.shadowOffset,
-  }) : super(key: key);
+  });
 
   @override
   State<GlassHandle> createState() => GlassHandleState();
